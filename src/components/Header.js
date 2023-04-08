@@ -1,22 +1,22 @@
-import React, { useEffect } from "react"; 
+import React from "react"; 
 import { Bars3Icon } from "@heroicons/react/24/outline";
 import discordlogo from "./images/discordlogo.png";
 import { useAuthState } from 'react-firebase-hooks/auth';
-import {auth, signInWithGoogle } from "./firebase";
 import { useNavigate } from "react-router-dom";
+import {auth, googleProvider} from "./firebase";
 
 
 function Header() {
-   const navigate = useNavigate();
-   const [user, loading, error] = useAuthState(auth);
+   const [user] = useAuthState(auth);
+   const navigate = useNavigate(); 
 
-   useEffect(() => {
-    if (loading) {
-      // maybe trigger a loading screen
-      return;
-    }
-    if (user) navigate("/Home");
-  });
+   const signIn = (e) => {    
+      auth
+      .signInWithPopup(googleProvider)
+      .then(() => navigate("/Channels"))
+      // .catch((error) => alert("error.message"));
+      e.preventDefault();   
+   };
 
   return (
     <div>
@@ -41,8 +41,9 @@ function Header() {
           <button className="bg-white p-2 rounded-full text-xs md:text-sm
           px-4 focus:outline-none hover:shadow-2xl 
           hover:text-discord_blurple transition duration-200 ease-in-out 
-          whitespace-nowrap font-medium"
-          onClick={signInWithGoogle}>Login</button> 
+          whitespace-nowrap font-medium" 
+          onCLick={!user ? signIn : navigate("/Channels")}
+          >{!user ? "Login" : "Open Discord"}</button> 
           <Bars3Icon class="h-9 text-white cursor-pointer lg:hidden" />
          </div>
     </header>

@@ -7,17 +7,19 @@ import Home from "./components/Home";
 
 function App(){
     return (
+        
         <Router>
-        <div className="App">
-        <Header />
+        <switch>
         <Routes>
-          
-          <Route exact path="/" element={<Hero/>} />
-          <Route exact path="/channels" element={<Home/>} />
-
+        <Route exact path="/" element={<Header/> } />
+        <Route exact path="/" element={<Hero/>} />
+        
+        
+        <Route exact path="/Channels" element={<Home />} />
         </Routes>
-        </div>             
-        </Router>   
+        </switch>
+        </Router>           
+           
     )
 }
 
