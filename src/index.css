@@ -3,18 +3,24 @@
 @tailwind utilities;
 
 @layer components {
-   .link{
-      @apply cursor-pointer font-semibold text-base text-white hover:underline
-   };
-   .server-default{
-       @apply h-12 bg-discord_serverBg rounded-full flex justify-center 
-       items-center cursor-pointer hover:rounded-full transition-all duration-100 ease-out
-   };
+  .link {
+    @apply cursor-pointer font-semibold text-base text-white hover:underline;
+  }
+  .server-default {
+    @apply h-12 bg-discord_serverBg rounded-full flex justify-center 
+       items-center cursor-pointer hover:rounded-full transition-all duration-100 ease-out;
+  }
+  .icon-container {
+    @apply hover:bg-discord_channelHoverBg p-2 rounded-md;
+  }
+  .icon {
+    @apply h-6 text-discord_userSectionText cursor-pointer hover:text-discord_userSectionIconHover;
+  }
 
-   @font-face {
-      font-family: 'proxima-nova-bold';
-      src: url('/public/fonts/proxima-nova-bold.otf');
-      font-weight: normal;
-      font-style: normal;
-    };
-};
+  @font-face {
+    font-family: "proxima-nova-bold";
+    src: url("/public/fonts/proxima-nova-bold.otf");
+    font-weight: normal;
+    font-style: normal;
+  }
+}

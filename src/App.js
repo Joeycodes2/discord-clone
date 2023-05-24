@@ -5,19 +5,16 @@ import Hero from "./components/Hero";
 import Home from "./components/Home";
 
 
+
 function App(){
     return (
-        
         <Router>
-        <switch>
         <Routes>
-        <Route exact path="/" element={<Header/> } />
-        <Route exact path="/" element={<Hero/>} />
+        <Route exact path="/" element={(<><Header/><Hero/></>)}/>       
         
-        
-        <Route exact path="/Channels" element={<Home />} />
+        <Route exact path="/channels" element={<Home/>}/>
+        <Route exact path="/channels/:id" element={<Home/>} />
         </Routes>
-        </switch>
         </Router>           
            
     )
