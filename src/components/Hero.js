@@ -41,14 +41,26 @@ function Hero() {
         p-4 text-lg hover:shadow-2xl hover:text-discord_blurple transition duration-200 ease-in-out focus:outline-none"
             >
               <ArrowDownTrayIcon className="w-6 mr-2" />
-              Download for Windows
+              <a
+                href="https://discord.com/download"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Download for Windows
+              </a>
             </button>
             <button
               className="bg-gray-900 text-white w-72 font-medium flex items-center 
         justify-center rounded-full p-4 text-lg hover:shadow-2xl hover:bg-gray-800 
         focus:outline-none transition duration-200 ease-in-out"
             >
-              Open Discord in your browser
+              <a
+                href="https://discord.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open Discord in your browser
+              </a>
             </button>
           </div>
         </div>

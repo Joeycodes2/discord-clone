@@ -38,7 +38,6 @@ function Home() {
           getDocs(collectionRef).then((data) => {
             const newList = data.docs.find((_doc) => _doc.id === doc.id).data();
             setLists([...lists, { id: doc.id, ...newList }]);
-            console.log(newList, "NNEW DATA:FIND");
           });
         });
       } catch (error) {
@@ -61,7 +60,6 @@ function Home() {
 
   const handleSignOut = async () => {
     await auth.signOut().then(() => {
-      console.log("SIGNOUT SUCCESSFUL");
       navigate("/");
     });
   };
@@ -81,13 +79,28 @@ function Home() {
             </a>
           </div>
           <hr className="border-gray-700 border w-8 mx-auto" />
-          {/* <ServerIcon image={image3} /> */}
           <ServerIcon image={image2} />
-          {/* <ServerIcon image={image1} /> */}
-          {/* <ServerIcon image={image4} /> */}
           <ServerIcon image={image5} />
           <div className="server-default hover:bg-discord_green group">
-            <PlusIcon className="text-discord_green h-7 w-8 group-hover:text-white " />
+            <PlusIcon className="text-discord_green h-7 w-9 group-hover:text-white " />
+          </div>
+          <div className="server-default hover:bg-discord_green group">
+            <Icon
+              icon="mdi:compass"
+              width="24"
+              height="24"
+              className="text-discord_green h-7 
+            w-9 group-hover:text-white "
+            />
+          </div>
+          <hr className="border-gray-700 border w-8 mx-auto" />
+          <div className="server-default hover:bg-discord_green group">
+            <Icon
+              icon="material-symbols:download"
+              width="24"
+              height="24"
+              className="text-discord_green h-7 w-9 group-hover:text-white "
+            />
           </div>
         </div>
 

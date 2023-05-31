@@ -66,7 +66,6 @@ function Chat() {
       await addDoc(channelChatSubColRef, dataToSubmit).then((doc) => {
         getDocs(channelChatSubColRef).then((data) => {
           const newData = data.docs.find((_doc) => _doc.id === doc.id).data();
-          // console.log(newData, "NEW DATA:FIND");
           setSubcollectionDocs([
             ...subcollectionDocs,
             {
@@ -86,14 +85,11 @@ function Chat() {
       const mainCollectionName = "channels";
       const mainCollectionRef = collection(db, mainCollectionName);
       const querySnapshot = await getDocs(mainCollectionRef);
-
-      // Filter the specific document based on its ID
       const specificDocument = querySnapshot.docs.find(
         (doc) => doc.id === channelId
       );
 
       if (specificDocument) {
-        // Get the reference to the subcollection
         const channelChatSubColName = "channelChatCollection";
         const specificChannelIdRef = doc(db, "channels", channelId);
         const subcollectionRef = collection(
@@ -113,12 +109,11 @@ function Chat() {
             ...doc.data(),
           })
         );
-        // console.log(newData, "NEW DATA");
         setSubcollectionDocs(newData);
       }
     };
     fetchSubcollectionDocuments();
-  }, [channelId]);
+  }, [channelId, channelName, subcollectionDocs]);
 
   return (
     <div className="flex flex-col h-screen">
@@ -142,7 +137,7 @@ function Chat() {
             height="24"
             className="icon"
           />
-          <Icon icon="subway:bell" width="20" height="21" className="icon" />
+          <Icon icon="subway:bell" width="18" height="21" className="icon" />
           <Icon
             icon="fluent-mdl2:pinned-solid"
             width="20"

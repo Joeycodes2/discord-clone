@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { auth } from "./firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db } from "./firebase";
@@ -6,7 +6,14 @@ import moment from "moment";
 import { TrashIcon } from "@heroicons/react/24/solid";
 import { useSelector } from "react-redux";
 import { selectChannelId } from "../features/channelSlice";
-import { collection, doc, getDocs, deleteDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDocs,
+  deleteDoc,
+  query,
+  orderBy,
+} from "firebase/firestore";
 
 function Messages({ id, timestamp, message, name, photoURL, email }) {
   const channelId = useSelector(selectChannelId);
@@ -16,19 +23,24 @@ function Messages({ id, timestamp, message, name, photoURL, email }) {
     : "";
   const specificChannelIdRef = doc(db, "channels", channelId);
   const channelSubColName = "channelChatCollection";
+  const [chats, setChats] = useState([]);
   const channelSubColRef = collection(specificChannelIdRef, channelSubColName);
 
   const deleteChat = async () => {
     try {
-      const snapshot = await getDocs(channelSubColRef);
-      snapshot.forEach((chatDoc) => {
-        const chatDocumentId = chatDoc.id;
-        const chatDocumentRef = doc(channelSubColRef, `${chatDocumentId}`);
+      await getDocs(channelSubColRef).then((data) => {
+        const chatId = data.docs.find((doc) => doc.id === id).id;
+        const chatDocumentRef = doc(channelSubColRef, chatId);
         deleteDoc(chatDocumentRef);
-        console.log(`Chat with ID ${chatDocumentId} deleted successfully.`);
+        // console.log(`chat with ID ${chatId} successfully deleted`);
       });
+      const orderedQuery = query(channelSubColRef, orderBy("timestamp", "asc"));
+      const chatSnapshot = await getDocs(orderedQuery);
+      chatSnapshot.docs.map((doc) =>
+        setChats([...chats, { id: doc.id, ...doc.data() }])
+      );
     } catch (error) {
-      console.error("Error deleting chat:", error);
+      console.error("Error fetching updatedChat:", error);
     }
   };
 

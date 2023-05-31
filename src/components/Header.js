@@ -22,28 +22,38 @@ function Header() {
     <div>
       <header className="bg-discord_blue flex justify-between py-4 px-12 ">
         <a href="/">
-          <img src={discordlogo} className="w-28 h-12 object-contain" alt="" />
+          <img
+            src={discordlogo}
+            className="w-28 h-12 object-contain"
+            alt="DiscordLogo"
+          />
         </a>
         <div className="hidden text-white lg:flex space-x-10 items-center">
-          <a href="/" className="link">
+          <a href="https://discord.com/download" className="link">
             Download
           </a>
-          <a href="/" className="link">
+          <a href="https://discord.gift/" className="link">
             Nitro
           </a>
-          <a href="/" className="link">
+          <a
+            href="https://support.discord.com/hc/en-us/articles/360023968311-Server-Discovery"
+            className="link"
+          >
             Discover
           </a>
-          <a href="/" className="link">
+          <a
+            href="https://support.discord.com/hc/en-us/categories/115000168351-Trust-Safety"
+            className="link"
+          >
             Safety
           </a>
-          <a href="/" className="link">
+          <a href="https://support.discord.com/hc/en-us" className="link">
             Support
           </a>
-          <a href="/" className="link">
+          <a href="https://discord.com/blog" className="link">
             Blog
           </a>
-          <a href="/" className="link">
+          <a href="https://discord.com/careers" className="link">
             Careers
           </a>
         </div>
