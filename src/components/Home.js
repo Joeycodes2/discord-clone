@@ -73,12 +73,12 @@ function Home() {
     <>
       <div className="flex h-screen">
         <div className="flex flex-col space-y-3 bg-discord_serversBg p-3 min-w-max">
-          <div className="server-default  rounded-full bg-gray-500 hover:bg-discord_purple">
+          <div className="server-default  rounded-full hover:bg-discord_purple">
             <a href="/channels">
-              <img src={discordWhite} alt="" className="h-7" />
+              <img src={discordWhite} alt="" className="h-7 w-9" />
             </a>
           </div>
-          <hr className="border-gray-700 border w-8 mx-auto" />
+          <hr className="border-[#2f3136] border h-[2px] w-8 mx-auto" />
           <ServerIcon image={image2} />
           <ServerIcon image={image5} />
           <div className="server-default hover:bg-discord_green group">
@@ -93,7 +93,7 @@ function Home() {
             w-9 group-hover:text-white "
             />
           </div>
-          <hr className="border-gray-700 border w-8 mx-auto" />
+          <hr className="border-[#2f3136] border h-[2px]  w-8 mx-auto" />
           <div className="server-default hover:bg-discord_green group">
             <Icon
               icon="material-symbols:download"
@@ -130,7 +130,7 @@ function Home() {
                 onClick={handleAddServer}
               />
             </div>
-            <hr className="border-gray-700 my-6 mx-2 border" />
+            <hr className="border-discord_chatInputBg h-[2px] my-6 mx-2" />
             <div className="flex flex-col space-y-2 px-2 mb-4 group">
               {lists.map((listItem) => (
                 <Channel
@@ -144,7 +144,7 @@ function Home() {
           </div>
           <div
             className="bg-discord_userSectionBg p-2 flex justify-between items-center
-          space-x-8"
+          space-x-6"
           >
             <div className="flex items-center space-x-1">
               <ServerIcon
