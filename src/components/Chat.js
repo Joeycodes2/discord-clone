@@ -174,20 +174,25 @@ function Chat() {
       </main>
       <div className="flex items-center p-2.5 bg-discord_chatInputBg mx-5 mb-7 rounded-lg">
         <PlusCircleIcon className="icon mr-4 h-8 w-8" />
-        <form className="flex-grow w-full">
+        <form className="flex flex-grow w-full">
           <input
             type="text"
             disabled={!channelId}
             className="bg-transparent focus:outline-none text-discord_chatInputTxt w-full
              placeholder-[#72767d] text-md pr-4"
             onChange={handleChange}
+            name="message"
             value={message}
             placeholder={
               channelId ? `Message #${channelName}` : "Select a channel"
             }
           />
-          <button type="submit" hidden onClick={submitChat}>
-            send
+          <button
+            type="submit"
+            onClick={submitChat}
+            className="flex-row sm:inline md:hidden lg:hidden text-[#72767d] mr-2"
+          >
+            <Icon icon="fa:send-o" width="22" height="22" />
           </button>
         </form>
         <GiftIcon className="icon mr-3 h-8 w-8" />

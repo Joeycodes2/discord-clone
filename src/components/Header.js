@@ -10,8 +10,9 @@ function Header() {
   const navigate = useNavigate();
   const [user] = useAuthState(auth);
 
-  const signIn = async () => {
+  const signIn = async (e) => {
     try {
+      e.preventDefault();
       await signInWithPopup(auth, googleProvider);
     } catch (error) {
       console.error(error);
