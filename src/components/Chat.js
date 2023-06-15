@@ -27,7 +27,7 @@ import "firebase/database";
 import Messages from "./Messages";
 import "./styles.css";
 
-function Chat() {
+function Chat({ onClick }) {
   const channelId = useSelector(selectChannelId);
   const channelName = useSelector(selectChannelName);
   const [user] = useAuthState(auth);
@@ -158,7 +158,11 @@ function Chat() {
           <QuestionMarkCircleIcon className="icon" />
         </div>
       </header>
-      <main className="flex-grow overflow-y-auto custom-scrollbar sm:overflow-y-auto sm:custom-scrollbar">
+      <main
+        className="flex-grow overflow-y-auto custom-scrollbar sm:overflow-y-auto 
+      sm:custom-scrollbar"
+        onClick={onClick}
+      >
         {subcollectionDocs.map((doc) => (
           <Messages
             key={doc.id}

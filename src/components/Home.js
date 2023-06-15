@@ -25,9 +25,14 @@ import "./styles.css";
 function Home() {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-
   const [lists, setLists] = useState([]);
+  const [isExpanded, setIsExpanded] = useState(true);
+
   const collectionRef = collection(db, "channels");
+
+  const toggleVisibility = () => {
+    setIsExpanded((prevIsExpanded) => !prevIsExpanded);
+  };
 
   const handleAddServer = async () => {
     const channelName = prompt("Create your Channel");
@@ -71,8 +76,13 @@ function Home() {
 
   return (
     <>
-      <div className="flex h-screen">
-        <div className="flex flex-col space-y-3 bg-discord_serversBg p-3 min-w-max">
+      <div className="relative flex h-screen">
+        <div
+          className={`absolute sm:min-w-max sm:h-screen transition-transform duration-500 ease-in-out transform-none ${
+            isExpanded ? "-translate-x-1" : "translate-x-0"
+          }
+         flex flex-col space-y-3 bg-discord_serversBg p-3 min-w-max h-full`}
+        >
           <div className="server-default  rounded-full hover:bg-discord_purple">
             <a href="/channels">
               <img src={discordWhite} alt="" className="h-7 w-9" />
@@ -104,7 +114,11 @@ function Home() {
           </div>
         </div>
 
-        <div className="bg-discord_channelBg flex flex-col min-w-max">
+        <div
+          className={`relative ml-16 sm:w-46 sm:h-screen transition-transform duration-500 ease-in-out transform-none ${
+            isExpanded ? "-translate-x-8" : "translate-x-0"
+          } bg-discord_channelBg flex flex-col min-w-max`}
+        >
           <h2
             className="flex text-white font-bold text-sm items-center
              justify-between border-b border-gray-800 p-4 hover:bg-discord_serverHoverNameBg
@@ -131,7 +145,10 @@ function Home() {
               />
             </div>
             <hr className="border-discord_chatInputBg h-[2px] my-6 mx-2" />
-            <div className="flex flex-col space-y-2 px-2 mb-4 group">
+            <div
+              className="flex flex-col space-y-2 px-2 mb-4 group"
+              onClick={toggleVisibility}
+            >
               {lists.map((listItem) => (
                 <Channel
                   className="mb-12"
@@ -144,12 +161,12 @@ function Home() {
           </div>
           <div
             className="bg-discord_userSectionBg p-2 flex justify-between items-center
-          space-x-6"
+            space-x-6"
           >
             <div className="flex items-center space-x-1">
               <ServerIcon
                 image={user.photoURL}
-                className="h-10"
+                className="h-10 mr-2"
                 onClick={handleSignOut}
               />
               <h4 className="text-white text-xs font-medium">
@@ -164,7 +181,13 @@ function Home() {
                 <MicrophoneIcon className="h-5 icon" />
               </div>
               <div className="icon-container">
-                <Icon icon="ic:round-headset" className="h-5 w-6 icon" />
+                <Icon
+                  icon="jam:headset-f"
+                  width="24"
+                  height="24"
+                  className="h-5 icon space-x-2"
+                />
+                {/* <Icon icon="ic:round-headset" className="h-5 w-6 icon" /> */}
               </div>
               <div className="icon-container">
                 <Cog8ToothIcon className="h-5 icon" />
@@ -173,8 +196,13 @@ function Home() {
           </div>
         </div>
 
-        <div className="bg-discord_serverBg flex-grow">
-          <Chat />
+        <div
+          className={`relative -left-0 sm:pr-46 sm:h-screen
+          transition-transform duration-500 ease-in-out sm:transform ${
+            isExpanded ? "translate-x-0" : "-translate-x-2/3"
+          } bg-discord_serverBg flex-grow lg:transform-none`}
+        >
+          <Chat onClick={toggleVisibility} />
         </div>
       </div>
     </>

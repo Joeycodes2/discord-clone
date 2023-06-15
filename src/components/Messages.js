@@ -26,7 +26,8 @@ function Messages({ id, timestamp, message, name, photoURL, email }) {
   const [chats, setChats] = useState([]);
   const channelSubColRef = collection(specificChannelIdRef, channelSubColName);
 
-  const deleteChat = async () => {
+  const deleteChat = async (event) => {
+    event.stopPropagation();
     try {
       await getDocs(channelSubColRef).then((data) => {
         const chatId = data.docs.find((doc) => doc.id === id).id;
@@ -45,7 +46,7 @@ function Messages({ id, timestamp, message, name, photoURL, email }) {
   };
 
   return (
-    <div className="flex items-center p-1 pl-5 my-5 mr-2 hover:bg-discord_messageBg group">
+    <div className="flex items-center p-1 pl-5 my-5 mr-4 sm:mr-6 hover:bg-discord_messageBg group">
       <img
         src={photoURL}
         alt=""
@@ -58,12 +59,14 @@ function Messages({ id, timestamp, message, name, photoURL, email }) {
           </span>
           <span className="text-discord_message text-xs">{formattedTime}</span>
         </h4>
-        <p className="text-sm text-[#dcddde]">{message}</p>
+        <p className="text-sm text-[#dcddde] sm:text-justify sm:pr-10">
+          {message}
+        </p>
       </div>
       {user.email === email && (
         <div
-          className="hover:bg-discord_deleteIcon text-discord_deleteIcon cursor-pointer p-1 ml-auto
-        rounded-md hover:text-white"
+          className="hover:bg-discord_deleteIcon text-discord_deleteIcon cursor-pointer p-1 
+          ml-auto rounded-md hover:text-white sm:ml-auto"
           onClick={deleteChat}
         >
           <TrashIcon className="h-5 hidden group-hover:inline" />
